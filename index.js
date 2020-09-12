@@ -16,52 +16,52 @@ preButton.addEventListener('click', function() {
 });
 
 function turnNextPage() {
-  let bottomVertexX = 920;
-  let bottomVertexY = 582 + TOP_MARGIN;
-  let bottomX = 920;
-  let topX = 920;
-  let topVertextX = 920;
-  let topVertextY = 0 + TOP_MARGIN;
+  let bottomCornerX = 920;
+  let bottomCornerY = 582 + TOP_MARGIN;
+  let bottomEdgeX = 920;
+  let topEdgeX = 920;
+  let topCornerX = 920;
+  let topCornerY = 0 + TOP_MARGIN;
 
   let turningSpeed = {
     y: 3.5
   }
 
   const id = setInterval(function() {
-    drawLine({ bottomVertexX, bottomVertexY, bottomX, topVertextX, topVertextY, topX });
-    bottomVertexX = bottomVertexX - 5;
-    topVertextX = topVertextX - 5;
+    drawLine({ bottomCornerX, bottomCornerY, bottomEdgeX, topCornerX, topCornerY, topEdgeX });
+    bottomCornerX = bottomCornerX - 5;
+    topCornerX = topCornerX - 5;
 
-    bottomX = 920 - ((920 - bottomVertexX) / 2)
-    topX = 920 - ((920 - bottomVertexX) / 2)
+    bottomEdgeX = 920 - ((920 - bottomCornerX) / 2)
+    topEdgeX = 920 - ((920 - bottomCornerX) / 2)
 
-    if (bottomVertexX >= 920 / 2) {
-      if (bottomVertexY > 497 + TOP_MARGIN) {
-        bottomVertexY = bottomVertexY - turningSpeed.y;
+    if (bottomCornerX >= 920 / 2) {
+      if (bottomCornerY > 497 + TOP_MARGIN) {
+        bottomCornerY = bottomCornerY - turningSpeed.y;
 
-        topVertextY = topVertextY - turningSpeed.y;
+        topCornerY = topCornerY - turningSpeed.y;
 
         turningSpeed.y *= 0.96;
 
       }
-      // console.log('bottomVertexY:', bottomVertexY)
+      // console.log('bottomCornerY:', bottomCornerY)
     } else {
-      bottomVertexY = bottomVertexY + turningSpeed.y;
-      topVertextY = topVertextY + turningSpeed.y;
+      bottomCornerY = bottomCornerY + turningSpeed.y;
+      topCornerY = topCornerY + turningSpeed.y;
       turningSpeed.y *= 1.04;
     }
 
-    if (bottomVertexX < 0) clearInterval(id);
+    if (bottomCornerX < 0) clearInterval(id);
   }, 1)
 }
 
-function drawLine({ bottomVertexX, bottomVertexY, bottomX, topVertextX, topVertextY, topX }) {
+function drawLine({ bottomCornerX, bottomCornerY, bottomEdgeX, topCornerX, topCornerY, topEdgeX }) {
   ctx.clearRect(0, 0, 920, 582 + TOP_MARGIN);
   ctx.beginPath();
-  ctx.moveTo(bottomX, 582 + TOP_MARGIN);
-  ctx.lineTo(bottomVertexX, bottomVertexY);
-  ctx.lineTo(topVertextX, topVertextY);
-  ctx.lineTo(topX, 0 + TOP_MARGIN);
+  ctx.moveTo(bottomEdgeX, 582 + TOP_MARGIN);
+  ctx.lineTo(bottomCornerX, bottomCornerY);
+  ctx.lineTo(topCornerX, topCornerY);
+  ctx.lineTo(topEdgeX, 0 + TOP_MARGIN);
   ctx.closePath();
   ctx.stroke();
 }
