@@ -5,8 +5,11 @@ const BOOK_WIDTH = 920; // 이 값에 따라 나머지 비율이 변한다.
 const BOOK_HEIGHT = Math.round(BOOK_WIDTH * 0.6326);
 const TOP_MARGIN = Math.round(BOOK_WIDTH * 0.1086);
 
+let animationId;
+
 const nextButton = document.getElementById('next-button');
 nextButton.addEventListener('click', function () {
+  animationId && clearInterval(animationId);
   turnNextPage();
 });
 
@@ -27,7 +30,7 @@ function turnNextPage() {
   let bottomCornerSpeed = 3.5;
   let topCornerSpeed = 3.5;
 
-  const id = setInterval(function () {
+  animationId = setInterval(function () {
     drawPageTurning({
       bottomEdgeX,
       bottomCornerX,
@@ -48,7 +51,7 @@ function turnNextPage() {
     }
 
     if (bottomCornerX < 0) {
-      clearInterval(id);
+      clearInterval(animationId);
       trimPage();
     }
   }, 1);
