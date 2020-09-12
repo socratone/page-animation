@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: antiquewhite;
+}
+
+#book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8rem 0 1rem 0;
+  position: relative;
+}
+
+#canvas-wrapper {
+  width: 920px;
+  height: 582px;
+}
+
+#canvas-background {
+  background-color: white;
+  width: 920px;
+  height: 582px;
+  position: absolute;
+}
+
+#canvas {
+  position: absolute;
+  bottom: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+#buttons {
+  width: 920px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 0.5rem;
+}
