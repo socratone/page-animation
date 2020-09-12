@@ -50,22 +50,34 @@ function turnNextPage() {
       moveTopsUp();
     }
 
-    if (bottomCornerX < 0) {
+    if (bottomCornerX <= 0) bottomCornerX = 0;
+    if (topCornerX <= 0) topCornerX = 0;
+    if (bottomCornerX === 0 && topCornerX === 0) {
       clearInterval(animationId);
       trimPage();
     }
-  }, 1);
+  }, 10);
 
   function moveBottomEdgeLeft() {
-    bottomEdgeX = BOOK_WIDTH - (BOOK_WIDTH - bottomCornerX) / 2;
+    const result = BOOK_WIDTH - (BOOK_WIDTH - bottomCornerX) / 2;
+    if (result <= BOOK_WIDTH / 2) {
+      bottomEdgeX = BOOK_WIDTH / 2;
+    } else {
+      bottomEdgeX = result;
+    }
   }
 
   function moveTopEdgeLeft() {
-    topEdgeX = topEdgeX - 5;
+    const result = BOOK_WIDTH - (BOOK_WIDTH - topCornerX) / 2;
+    if (result <= BOOK_WIDTH / 2) {
+      topEdgeX = BOOK_WIDTH / 2;
+    } else {
+      topEdgeX = result;
+    }
   }
 
   function moveTopCornerLeft() {
-    topCornerX = topCornerX - 10; // x축 이동
+    topCornerX -= 16; // x축 이동
     // y축 상승
     if (topCornerX >= BOOK_WIDTH / 2) {
       topCornerY -= topCornerSpeed;
@@ -77,7 +89,7 @@ function turnNextPage() {
   }
 
   function moveBottomCornerLeft() {
-    bottomCornerX = bottomCornerX - 5; // x축 이동
+    bottomCornerX -= 10; // x축 이동
     // y축 상승
     if (bottomCornerX >= BOOK_WIDTH / 2) {
       bottomCornerY -= bottomCornerSpeed;
@@ -90,7 +102,7 @@ function turnNextPage() {
   }
 
   function moveTopsUp() {
-    const result = topEdgeY - 6;
+    const result = topEdgeY - 16;
     if (result < 0 + TOP_MARGIN) {
       topEdgeY = 0 + TOP_MARGIN;
       topCornerY = 0 + TOP_MARGIN;
