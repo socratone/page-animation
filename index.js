@@ -26,7 +26,7 @@ function turnNextPage() {
   let topCornerSpeed = 3.5;
 
   const id = setInterval(function () {
-    drawLine({
+    drawPageTurning({
       bottomEdgeX,
       bottomCornerX,
       bottomCornerY,
@@ -96,7 +96,7 @@ function turnNextPage() {
   }
 
   function trimPage() {
-    drawLine({
+    drawPageTurning({
       bottomCornerX: 0,
       bottomCornerY: 582 + TOP_MARGIN,
       bottomEdgeX: 920 / 2,
@@ -108,7 +108,7 @@ function turnNextPage() {
   }
 }
 
-function drawLine({
+function drawPageTurning({
   bottomEdgeX,
   bottomCornerX,
   bottomCornerY,
@@ -124,5 +124,7 @@ function drawLine({
   ctx.lineTo(topCornerX, topCornerY);
   ctx.lineTo(topEdgeX, topEdgeY);
   ctx.closePath();
-  ctx.stroke();
+  ctx.fillStyle = 'gray';
+  ctx.fill();
+  // ctx.stroke();
 }
