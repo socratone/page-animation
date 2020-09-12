@@ -2,6 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 const TOP_MARGIN = 100;
+const MAX_HEIGHT = 497;
 
 const nextButton = document.getElementById('next-button');
 nextButton.addEventListener('click', function () {
@@ -21,9 +22,7 @@ function turnNextPage() {
   let topCornerX = 920;
   let topCornerY = 0 + TOP_MARGIN;
 
-  let turningSpeed = {
-    y: 3.5,
-  };
+  let turningSpeed = 3.5;
 
   const id = setInterval(function () {
     drawLine({
@@ -34,29 +33,65 @@ function turnNextPage() {
       topCornerY,
       topEdgeX,
     });
-    bottomCornerX = bottomCornerX - 5;
-    topCornerX = topCornerX - 5;
 
-    bottomEdgeX = 920 - (920 - bottomCornerX) / 2;
-    topEdgeX = 920 - (920 - bottomCornerX) / 2;
+    setBottomEdgeX();
+    setTopEdgeX();
 
-    if (bottomCornerX >= 920 / 2) {
-      if (bottomCornerY > 497 + TOP_MARGIN) {
-        bottomCornerY = bottomCornerY - turningSpeed.y;
+    setBottomCornerX();
+    setTopCornerX();
 
-        topCornerY = topCornerY - turningSpeed.y;
+    setCorners();
 
-        turningSpeed.y *= 0.96;
-      }
-      // console.log('bottomCornerY:', bottomCornerY)
-    } else {
-      bottomCornerY = bottomCornerY + turningSpeed.y;
-      topCornerY = topCornerY + turningSpeed.y;
-      turningSpeed.y *= 1.04;
+    if (bottomCornerX < 0) {
+      clearInterval(id);
+      trimBottomCorner();
     }
-
-    if (bottomCornerX < 0) clearInterval(id);
   }, 1);
+
+  function setBottomCornerX() {
+    bottomCornerX = bottomCornerX - 5;
+  }
+
+  function setTopCornerX() {
+    topCornerX = topCornerX - 5;
+  }
+
+  function setBottomEdgeX() {
+    bottomEdgeX = 920 - (920 - bottomCornerX) / 2;
+  }
+
+  function setTopEdgeX() {
+    topEdgeX = 920 - (920 - bottomCornerX) / 2;
+  }
+
+  function setCorners() {
+    // 상승
+    if (bottomCornerX >= 920 / 2) {
+      if (bottomCornerY > MAX_HEIGHT + TOP_MARGIN) {
+        bottomCornerY -= turningSpeed;
+        topCornerY -= turningSpeed;
+
+        turningSpeed *= 0.96;
+      }
+      // 하강
+    } else {
+      bottomCornerY += turningSpeed;
+      topCornerY += turningSpeed;
+
+      turningSpeed *= 1.04;
+    }
+  }
+
+  function trimBottomCorner() {
+    drawLine({
+      bottomCornerX: 0,
+      bottomCornerY: 582 + TOP_MARGIN,
+      bottomEdgeX: 920 / 2,
+      topCornerX: 0,
+      topCornerY: 0 + TOP_MARGIN,
+      topEdgeX: 920 / 2,
+    });
+  }
 }
 
 function drawLine({
