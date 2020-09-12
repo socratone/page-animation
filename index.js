@@ -1,11 +1,21 @@
-function PageTurning() {
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-
-  const TURNING_SPEED = 10;
-  const BOOK_WIDTH = 920; // 이 값에 따라 나머지 비율이 변한다.
+function PageTurning(bookWidth, turningSpeed) {
+  const TURNING_SPEED = turningSpeed;
+  const BOOK_WIDTH = bookWidth; // 이 값에 따라 나머지 비율이 변한다.
   const BOOK_HEIGHT = Math.round(BOOK_WIDTH * 0.6326);
   const TOP_MARGIN = Math.round(BOOK_WIDTH * 0.1086);
+
+  const canvasWrapper = document.getElementById('canvas-wrapper');
+  canvasWrapper.style.width = BOOK_WIDTH + 'px';
+  canvasWrapper.style.height = BOOK_HEIGHT + 'px';
+
+  const canvasBackground = document.getElementById('canvas-background');
+  canvasBackground.style.width = BOOK_WIDTH + 'px';
+  canvasBackground.style.height = BOOK_HEIGHT + 'px';
+
+  const canvas = document.getElementById('canvas');
+  canvas.width = BOOK_WIDTH;
+  canvas.height = BOOK_HEIGHT + TOP_MARGIN;
+  const ctx = canvas.getContext('2d');
 
   let animationId;
 
@@ -17,7 +27,6 @@ function PageTurning() {
 
   const preButton = document.getElementById('pre-button');
   preButton.addEventListener('click', function () {
-    console.log('이전 버튼 클릭');
     animationId && clearInterval(animationId);
     turnPrePage();
   });
@@ -251,4 +260,4 @@ function PageTurning() {
   }
 }
 
-PageTurning();
+PageTurning(1000, 5);

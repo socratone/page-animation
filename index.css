@@ -9,19 +9,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8rem 0 1rem 0;
+  margin: 4rem 0 1rem 0;
   position: relative;
-}
-
-#canvas-wrapper {
-  width: 920px;
-  height: 582px;
 }
 
 #canvas-background {
   background-color: white;
-  width: 920px;
-  height: 582px;
   position: absolute;
 }
 
