@@ -56,7 +56,7 @@ function turnNextPage() {
       clearInterval(animationId);
       trimPage();
     }
-  }, 10);
+  }, 10); // 속도 조절
 
   function moveBottomEdgeLeft() {
     const result = BOOK_WIDTH - (BOOK_WIDTH - bottomCornerX) / 2;
@@ -102,7 +102,7 @@ function turnNextPage() {
   }
 
   function moveTopsUp() {
-    const result = topEdgeY - 16;
+    const result = topEdgeY - 16; // y축 이동
     if (result < 0 + TOP_MARGIN) {
       topEdgeY = 0 + TOP_MARGIN;
       topCornerY = 0 + TOP_MARGIN;
