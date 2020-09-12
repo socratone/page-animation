@@ -4,15 +4,13 @@ const ctx = canvas.getContext('2d');
 const TOP_MARGIN = 100;
 
 const nextButton = document.getElementById('next-button');
-nextButton.addEventListener('click', function() {
-
+nextButton.addEventListener('click', function () {
   turnNextPage();
-  
 });
 
 const preButton = document.getElementById('pre-button');
-preButton.addEventListener('click', function() {
-  
+preButton.addEventListener('click', function () {
+  console.log('이전 버튼 클릭');
 });
 
 function turnNextPage() {
@@ -24,16 +22,23 @@ function turnNextPage() {
   let topCornerY = 0 + TOP_MARGIN;
 
   let turningSpeed = {
-    y: 3.5
-  }
+    y: 3.5,
+  };
 
-  const id = setInterval(function() {
-    drawLine({ bottomCornerX, bottomCornerY, bottomEdgeX, topCornerX, topCornerY, topEdgeX });
+  const id = setInterval(function () {
+    drawLine({
+      bottomCornerX,
+      bottomCornerY,
+      bottomEdgeX,
+      topCornerX,
+      topCornerY,
+      topEdgeX,
+    });
     bottomCornerX = bottomCornerX - 5;
     topCornerX = topCornerX - 5;
 
-    bottomEdgeX = 920 - ((920 - bottomCornerX) / 2)
-    topEdgeX = 920 - ((920 - bottomCornerX) / 2)
+    bottomEdgeX = 920 - (920 - bottomCornerX) / 2;
+    topEdgeX = 920 - (920 - bottomCornerX) / 2;
 
     if (bottomCornerX >= 920 / 2) {
       if (bottomCornerY > 497 + TOP_MARGIN) {
@@ -42,7 +47,6 @@ function turnNextPage() {
         topCornerY = topCornerY - turningSpeed.y;
 
         turningSpeed.y *= 0.96;
-
       }
       // console.log('bottomCornerY:', bottomCornerY)
     } else {
@@ -52,10 +56,17 @@ function turnNextPage() {
     }
 
     if (bottomCornerX < 0) clearInterval(id);
-  }, 1)
+  }, 1);
 }
 
-function drawLine({ bottomCornerX, bottomCornerY, bottomEdgeX, topCornerX, topCornerY, topEdgeX }) {
+function drawLine({
+  bottomCornerX,
+  bottomCornerY,
+  bottomEdgeX,
+  topCornerX,
+  topCornerY,
+  topEdgeX,
+}) {
   ctx.clearRect(0, 0, 920, 582 + TOP_MARGIN);
   ctx.beginPath();
   ctx.moveTo(bottomEdgeX, 582 + TOP_MARGIN);

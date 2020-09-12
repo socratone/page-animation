@@ -1,0 +1,23 @@
+{
+  "name": "page-turning-animation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/socratone/page-turning-animation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/socratone/page-turning-animation/issues"
+  },
+  "homepage": "https://github.com/socratone/page-turning-animation#readme",
+  "devDependencies": {
+    "prettier": "^2.1.1"
+  }
+}
