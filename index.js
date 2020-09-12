@@ -16,41 +16,52 @@ preButton.addEventListener('click', function() {
 });
 
 function turnNextPage() {
-  let vertexX = 920;
-  let vertexY = 582 + TOP_MARGIN;
+  let bottomVertexX = 920;
+  let bottomVertexY = 582 + TOP_MARGIN;
   let bottomX = 920;
+  let topX = 920;
+  let topVertextX = 920;
+  let topVertextY = 0 + TOP_MARGIN;
 
   let turningSpeed = {
     y: 3.5
   }
 
   const id = setInterval(function() {
-    drawLine(vertexX, vertexY, bottomX);
-    vertexX = vertexX - 5;
-    bottomX = 920 - ((920 - vertexX) / 2)
+    drawLine({ bottomVertexX, bottomVertexY, bottomX, topVertextX, topVertextY, topX });
+    bottomVertexX = bottomVertexX - 5;
+    topVertextX = topVertextX - 5;
 
-    if (vertexX >= 920 / 2) {
-      if (vertexY > 497 + TOP_MARGIN) {
-        vertexY = vertexY - turningSpeed.y;
+    bottomX = 920 - ((920 - bottomVertexX) / 2)
+    topX = 920 - ((920 - bottomVertexX) / 2)
+
+    if (bottomVertexX >= 920 / 2) {
+      if (bottomVertexY > 497 + TOP_MARGIN) {
+        bottomVertexY = bottomVertexY - turningSpeed.y;
+
+        topVertextY = topVertextY - turningSpeed.y;
+
         turningSpeed.y *= 0.96;
-      } else {
-        vertexY = 497 + TOP_MARGIN;
+
       }
-      // console.log('vertexY:', vertexY)
+      // console.log('bottomVertexY:', bottomVertexY)
     } else {
-      vertexY = vertexY + turningSpeed.y;
+      bottomVertexY = bottomVertexY + turningSpeed.y;
+      topVertextY = topVertextY + turningSpeed.y;
       turningSpeed.y *= 1.04;
     }
-    if (vertexX < 0) clearInterval(id);
+
+    if (bottomVertexX < 0) clearInterval(id);
   }, 1)
 }
 
-function drawLine(vertexX, vertexY, bottomX) {
+function drawLine({ bottomVertexX, bottomVertexY, bottomX, topVertextX, topVertextY, topX }) {
   ctx.clearRect(0, 0, 920, 582 + TOP_MARGIN);
   ctx.beginPath();
   ctx.moveTo(bottomX, 582 + TOP_MARGIN);
-  ctx.lineTo(vertexX, vertexY);
-  ctx.lineTo(920, 0 + TOP_MARGIN);
+  ctx.lineTo(bottomVertexX, bottomVertexY);
+  ctx.lineTo(topVertextX, topVertextY);
+  ctx.lineTo(topX, 0 + TOP_MARGIN);
   ctx.closePath();
   ctx.stroke();
 }
